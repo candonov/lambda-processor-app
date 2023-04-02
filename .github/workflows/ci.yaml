@@ -34,7 +34,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Debug output file
-      run: cat goreleaser.yml
+      run: cat goreleaser.yaml
 
     - name: Set output variable
       id: set-version
