@@ -32,10 +32,9 @@ jobs:
         args: release --clean
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
-    - name: Pass artifact name to next step
-      id: artifact_name
-      run: echo "::set-output name=artifact_name::$(echo '${{ steps.goreleaser.outputs.artifacts }}' | jq -r '.[] | select(.type=="Archive").name')"
 
+    - name: Set artifact name as environment variable
+      run: echo "ARTIFACT_NAME=$(echo '${{ steps.goreleaser.outputs.artifacts }}' | jq -r '.[] | select(.type == "Archive").name')" >> $GITHUB_ENV
+ 
     - name: Use artifact name in next step
-      run: echo "The artifact name is ${{ steps.artifact_name.outputs.artifact_name }}"
+      run: echo ${{env.ARTIFACT_NAME}}
