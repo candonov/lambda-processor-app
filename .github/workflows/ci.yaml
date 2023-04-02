@@ -16,18 +16,23 @@ jobs:
     - uses: actions/setup-go@v4
       with:
         go-version: stable
+
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-    - uses: goreleaser/goreleaser-action@v4
+
+    - name: goreleaser
+      uses: goreleaser/goreleaser-action@v4
       with:
         distribution: goreleaser
         version: latest
         args: release --clean
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+    
+    - name: Use output variable
+      run: echo "The release version is ${{ steps.goreleaser.outputs.version }}"
 
