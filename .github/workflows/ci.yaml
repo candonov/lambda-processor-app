@@ -33,6 +33,15 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Use output variable
-      run: echo "The release version is ${{ steps.goreleaser.outputs.version }}"
+    - name: Debug output file
+      run: cat goreleaser.yml
 
+    - name: Set output variable
+      id: set-version
+      run: |
+        version=$(grep 'version: ' goreleaser.yml | awk '{ print $2 }')
+        echo "Found version: $version"
+        echo "::set-output name=version::$version"
+
+    - name: Debug output variable
+      run: echo "The release version is ${{ steps.set-version.outputs.version }}"
