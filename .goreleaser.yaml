@@ -32,6 +32,6 @@ changelog:
 
 blobs:
   - provider: s3
-    bucket: lambda-code-bucket-ab3
+    bucket: deploy-lambda-with-k8s
     region: us-east-1
     folder: lambda-processor-app/artifacts/{{ .Version }}
