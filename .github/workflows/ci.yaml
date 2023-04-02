@@ -41,13 +41,7 @@ jobs:
         # Use sed to replace the bucketKey value in the file with the ARTIFACT_NAME
         sed -i "s/bucketKey:.*/bucketKey: lambda-processor-app\/artifacts\/${{ env.ARTIFACT_NAME }}/g" claim/sqs-lambda-s3-claim.yaml
 
-    - name: Commit changes
-      run: |
-        git add claim/sqs-lambda-s3-claim.yaml
-        git commit -m "Update bucket key with ${ARTIFACT_NAME}"
-
-    - name: Push changes
-      uses: ad-m/github-push-action@v0.6.0
+    - name: Commit & Push changes
+      uses: actions-js/push@v1.4
       with:
-        branch: main #push directly to main for testing only
-        force: true
+        github_token: ${{ secrets.GITHUB_TOKEN }}
