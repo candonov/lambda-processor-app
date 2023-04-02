@@ -24,7 +24,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: goreleaser
+    - id: goreleaser
       uses: goreleaser/goreleaser-action@v4
       with:
         distribution: goreleaser
@@ -32,16 +32,10 @@ jobs:
         args: release --clean
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
-    - name: Debug output file
-      run: cat goreleaser.yaml
+  
+    - name: Pass artifact name to next step
+      id: artifact_name
+      run: echo "::set-output name=artifact_name::$(echo '${{ steps.goreleaser.outputs.artifacts }}' | jq -r '.[] | select(.type=="Archive").name')"
 
-    - name: Set output variable
-      id: set-version
-      run: |
-        version=$(grep 'version: ' goreleaser.yml | awk '{ print $2 }')
-        echo "Found version: $version"
-        echo "::set-output name=version::$version"
-
-    - name: Debug output variable
-      run: echo "The release version is ${{ steps.set-version.outputs.version }}"
+    - name: Use artifact name in next step
+      run: echo "The artifact name is ${{ steps.artifact_name.outputs.artifact_name }}"
