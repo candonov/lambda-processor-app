@@ -1,8 +1,10 @@
 name: Go releaser
 on:
   push:
-    tags:
-      - v0.**
+    branches:
+      - main
+    paths:
+      - 'app/**'
 
 permissions:
   contents: write
@@ -10,7 +12,12 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+    - uses: rymndhng/release-on-push-action@master
+      with:
+        bump_version_scheme: minor
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
@@ -32,8 +39,6 @@ jobs:
         distribution: goreleaser
         version: latest
         args: release --clean
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set artifact name as environment variable
       run: echo "ARTIFACT_NAME=$(echo '${{ steps.goreleaser.outputs.artifacts }}' | jq -r '.[] | select(.type == "Archive").name')" >> $GITHUB_ENV
@@ -46,5 +51,4 @@ jobs:
     - name: Commit & Push changes
       uses: actions-js/push@v1.4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
         message: "Updating claim bucketKey version to ${{ env.ARTIFACT_NAME }}"
