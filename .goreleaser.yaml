@@ -22,12 +22,3 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
-
-<<<<<<< HEAD
-blobs:
-  - provider: s3
-    bucket: deploy-lambda-with-k8s
-    region: us-east-1
-    folder: lambda-processor-app/artifacts/v{{ .Version }}
-=======
->>>>>>> 651242f (testing)
