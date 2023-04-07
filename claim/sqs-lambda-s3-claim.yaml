@@ -9,12 +9,7 @@ spec:
       awsblueprints.io/provider: aws
       awsblueprints.io/environment: dev
       serverless.awsblueprints.io/app: sqs-lambda-s3
-<<<<<<< HEAD
-  bucketName: deploy-lambda-with-k8s
-  bucketKey: lambda-processor-app/artifacts/v0.4.0/lambda-processor-app_0.4.0_linux_amd64.zip
-=======
   imageUri: 352858358668.dkr.ecr.us-east-1.amazonaws.com/lambda-test:latest
->>>>>>> 651242f (testing)
   memorySize: 128
   resourceConfig:
     providerConfigName: aws-provider-config
