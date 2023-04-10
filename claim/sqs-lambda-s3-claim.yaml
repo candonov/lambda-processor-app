@@ -9,7 +9,7 @@ spec:
       awsblueprints.io/provider: aws
       awsblueprints.io/environment: dev
       serverless.awsblueprints.io/app: sqs-lambda-s3
-  imageUri: 352858358668.dkr.ecr.us-east-1.amazonaws.com/lambda-test:v0.5.4
+  imageUri: 352858358668.dkr.ecr.us-east-1.amazonaws.com/lambda-test:v0.5.5
   memorySize: 128
   resourceConfig:
     providerConfigName: aws-provider-config
