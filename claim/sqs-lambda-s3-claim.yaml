@@ -1,7 +1,7 @@
 apiVersion: awsblueprints.io/v1alpha1
 kind: ServerlessApp
 metadata:
-  name: test-sqs-lambda-s3
+  name: sqs-lambda-s3-test
 spec:
   imageName: lambda-test:v0.5.7
   memorySize: 128
