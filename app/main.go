@@ -183,5 +183,3 @@ func getObjectName(body string) (string, error) {
 	return k.Value, nil
 }
 
-
-
