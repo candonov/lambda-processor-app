@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-lambda
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: claim
+    repoURL: https://github.com/candonov/lambda-processor-app
+    targetRevision: HEAD
