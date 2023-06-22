@@ -3,7 +3,7 @@ kind: ServerlessApp
 metadata:
   name: sqs-lambda-s3-test
 spec:
-  imageName: lambda-test:v0.5.11
+  imageName: lambda-test:v0.5.12
   memorySize: 256
   resourceConfig:
     providerConfigName: aws-provider-config
