@@ -4,7 +4,7 @@ metadata:
   name: sqs-lambda-s3-test
 spec:
   imageName: lambda-test:v0.5.13
-  memorySize: 128
+  memorySize: 256
   resourceConfig:
     providerConfigName: aws-provider-config
     region: us-east-1
